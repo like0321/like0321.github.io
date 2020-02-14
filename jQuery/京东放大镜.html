@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8"/>
+    <title></title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        img {
+            vertical-align: top;
+        }
+
+        #box {
+            width: 350px;
+            height: 350px;
+            margin: 100px 0 0 100px;
+            position: relative;
+        }
+
+        #small_box {
+            width: 100%;
+            height: 100%;
+            border: 1px solid #ccc;
+            position: relative;
+        }
+
+        #small_box img {
+            width: 350px;
+            height: 350px;
+        }
+
+        #mask {
+            width: 100px;
+            height: 100px;
+            background-color: rgba(255, 255, 0, .4);
+            position: absolute;
+            left: 0;
+            top: 0;
+            cursor: move;
+            display: none;
+        }
+
+        #big_box {
+            width: 600px;
+            height: 600px;
+            border: 1px solid #ccc;
+            overflow: hidden;
+            position: absolute;
+            left: 360px;
+            top: 0;
+            display: none;
+        }
+
+        #list {
+            margin: 20px 0 0 100px;
+        }
+
+        #list img {
+            margin: 3px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="box">
+    <div id="small_box">
+        <img src="images/pic001.jpg" alt="">
+        <span id="mask"></span>
+    </div>
+    <div id="big_box">
+        <img src="images/pic01.jpg" alt="" style="position:absolute; left: 0; top: 0;">
+    </div>
+</div>
+<!--下面三张小图-->
+<div id="list">
+    <img src="images/pic0001.jpg" alt="">
+    <img src="images/pic0002.jpg" alt="">
+    <img src="images/pic0003.jpg" alt="">
+</div>
+
+</body>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript">
+    $(function () {
+
+        //点击三张小图时box内变为相应图片
+        $("#list img").click(function () {
+            var index = $(this).index();
+            $("#small_box img").attr("src", "images/pic00" + (index + 1) + ".jpg");
+            $("#big_box img").attr("src", "images/pic0" + (index + 1) + ".jpg");
+        });
+
+        //		显示mask和大图
+        $("#box").hover(function () {
+            //鼠标移入时
+            $("#mask").show();
+            $("#big_box").show();
+
+            //鼠标的移动事件---鼠标是在小box上移动
+            $("#small_box").mousemove(function (ev) {
+
+                //鼠标此时的可视区域的横坐标和纵坐标
+                //主要是设置鼠标在遮挡层的中间显示
+                //mask移动的横向距离=页面可视区域的横坐标-box距离左边的距离-mask一半的宽度
+                var x = ev.pageX - $("#box").offset().left - $("#mask").width() / 2;
+                var y = ev.pageY - $("#box").offset().top - $("#mask").height() / 2;
+
+                //x最小移动距离
+                x = x < 0 ? 0 : x;
+                //x最大移动距离
+                x = x > ($("#small_box").width() - $("#mask").width()) ? ($("#small_box").width() - $("#mask").width()) : x;
+                //y最小移动距离
+                y = y < 0 ? 0 : y;
+                //y最大移动距离
+                y = y > ($("#small_box").height() - $("#mask").height()) ? ($("#small_box").height() - $("#mask").height()) : y;
+
+                //x和y的移动距离就是mask的left值和top值
+                $("#mask").css("left", x + "px");
+                $("#mask").css("top", y + "px");
+
+                // 大图怎么走
+                //x/bigX==small_box.width()/big_box.width()
+                var bigX = x / ($("#small_box").width() / $("#big_box").width());
+                var bigY = y / ($("#small_box").height() / $("#big_box").height());
+
+                // 设置大图片移动  img有定位，所以可以用left和top
+                $("#big_box img").css("left", -bigX + "px");
+                $("#big_box img").css("top", -bigY + "px");
+            })
+
+        }, function () {
+            //鼠标移出时
+            $("#mask").hide();
+            $("#big_box").hide()
+        })
+
+    })
+</script>
+
+</html>

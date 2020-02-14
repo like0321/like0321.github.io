@@ -1,0 +1,29 @@
+
+
+
+    语法：
+        animate(params,[speed],[easing],[fn])
+
+
+    参数：
+        params: 想要更改的样式属性，以对象形式传递，必须写。
+                属性名可以不用带引号
+                复合属性采取驼峰命名法
+
+        
+    例：
+        <button>动起来</button>
+        <div></div>
+
+
+            $("button").click(function(){
+
+                $("div").animate({
+                    left: 200,
+                    top: 300,
+                    opacity: .4,
+                    width: 500
+                }, 500);
+
+            })
+

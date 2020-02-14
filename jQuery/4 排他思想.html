@@ -1,0 +1,40 @@
+
+
+    排他思想：
+            当前元素设置样式，其余的兄弟元素清除样式
+
+
+    $(function(){
+
+        //1、给所有的按钮都绑定了点击事件      隐式迭代 
+        $("button").click(function(){
+            
+            //2、当前的元素变化背景颜色
+            $(this).css("background","pink");
+            
+            //3、其余的兄弟去掉背景颜色     隐式迭代
+            $(this).siblings("button").css("background","");
+
+        });
+
+
+    })
+
+
+
+    当前元素：    $(this)
+
+    当前元素索引号：  $(this).index()
+
+
+
+    // 1、 鼠标经过左侧的小 li
+    $("#left li").mouseover(function () {
+
+        // 2、 得到当前小li 的索引号
+        var index = $(this).index();
+        //3、 让右侧盒子相应索引号的图片显示出来
+        $("#content div").eq(index).show();
+        //4 让其余的图片 隐藏起来
+        $("#content div").eq(index).siblings().hide();
+    })

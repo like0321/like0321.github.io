@@ -1,0 +1,28 @@
+
+
+	scrollTop()/scrollLeft()   设置或获取元素被卷去的头部和左侧
+
+	1、scrollTop()方法设置或返回被选元素被卷去的头部
+
+
+		var boxTop = $(".container").offset();
+
+		//页面滚动事件
+		$(window).scroll(function(){
+
+			if( $(document).scrollTop() >= boxTop){
+				$(".back").fadeIn();
+			}else{
+				$(".back").fadeOut();
+			}
+		})
+
+		//返回顶部
+		$(".back").click(function(){
+			// $(document).scrollTop(0);
+
+			$("body,html").stop().animate({   //不能是文档，而是html和body元素做动画
+				scrollTop:0
+			})
+
+		})

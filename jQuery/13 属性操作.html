@@ -1,0 +1,78 @@
+
+
+	一、固有属性
+
+		元素固有属性就是元素本省自带的属性，比如<a>元素里面的href，比如<input>元素里面的type。
+
+
+	1、获取
+
+		prop("属性")
+
+		例：
+			$("a").prop("href")
+
+	
+
+	2、设置
+
+		prop("属性","属性值")
+
+		例：
+			$("a").prop("title","我们都挺好")
+
+
+
+	二、自定义属性
+
+	1、获取
+
+		$("div").attr("index")
+
+
+	2、设置
+
+		$("div").arrt("index",4)
+
+
+
+	三、数据缓存data()
+
+		data()方法可以在指定的元素上存取数据，并不会修改DOM元素结构。
+		一旦页面刷新，之前存放的数据都将被移除。
+
+
+	1、设置
+			$("span").data("uname","andy")
+
+
+	2、获取
+			$("span").data("uname")
+
+
+
+
+
+	
+    //实现全选反选
+    $("#theadInp").on('click', function () {
+        $("tbody input:checkbox").prop("checked", $(this).prop('checked'));
+    });
+
+
+    // 实现子选
+    $("tbody input:checkbox").on('click', function () {
+
+        $("tbody input:checkbox").each(function () {
+
+            //如果当前的没选中
+            if (!$(this).prop("checked")) {
+                $("#theadInp").prop("checked", false);
+                return false;
+            }
+
+            $("#theadInp").prop("checked", true);
+        })
+
+    });
+

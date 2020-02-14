@@ -1,0 +1,36 @@
+
+
+    hover就是鼠标经过和离开的复合写法
+
+    语法：
+        hover([over,]out)
+
+    参数：
+        over：鼠标移动元素上要触发的函数(相当于mouseenter)
+
+        out：鼠标移出元素要触发的函数(相当于mouseleave)
+
+    例：
+            $(".nav>li").hover(function(){
+
+                $(this).children("ul").slideDown(200);
+
+            },function(){
+
+                $(this).children("ul").slideUp(200);
+
+            })
+
+
+
+    
+    2、 简化版
+
+        事件切换hover  如果只写一个函数，那么鼠标经过和鼠标离开都会触发这个函数
+
+            $(".nav>li").hover(function(){
+
+                $(this).children("ul").slideToggle(200)
+
+            })
+

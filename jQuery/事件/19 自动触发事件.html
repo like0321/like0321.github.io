@@ -1,0 +1,44 @@
+
+
+
+	一、自动触发事件   trigger()
+
+		有些事件希望自动触发，比如轮播图自动播放功能跟点击右侧按钮一致。
+
+		可以利用定时器自动触发右侧按钮点击事件，不必鼠标点击触发。
+
+
+
+	1、element.click()   
+
+	例：
+		$("div").on("click",function(){
+			alert(1)
+		})
+ 
+		$("div").click();  //第一种简写形式
+
+
+
+	2、element.trigger("type") 
+
+	例：
+		$("div").on("click",function(){
+			alert(1)
+		})
+ 
+		$("div").trigger("click");  
+
+
+	
+	3、element.triggerHandler(type)     不会触发元素的默认行为
+
+	例：
+		$("div").on("click",function(){
+			alert(1)
+		})
+ 
+		$("div").triggerHandler("click");  
+
+
+
