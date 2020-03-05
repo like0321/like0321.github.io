@@ -1,0 +1,95 @@
+{extend name="base" /}
+
+{block name="css"}
+    <style>
+        #upload_images img{
+            width: 150px;
+        }
+    </style>
+{/block}
+{block name="body"}
+<div class="layui-body">
+    <div class="layui-tab layui-tab-brief">
+        <ul class="layui-tab-title">
+            <li><a href="{:url('index')}">管理员</a></li>
+            <li class="layui-this">编辑管理员</li>
+        </ul>
+        <div class="layui-tab-content">
+            <form action="{:url('edit')}" class="layui-form form-container" method="post">
+                <div class="layui-form-item">
+                    <label for="" class="layui-form-label">名称</label>
+                    <div class="layui-input-block">
+                        <input type="text" required lay-verify="required" class="layui-input" placeholder="请输入用户名" name="username" value="{$info.username}">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label for="" class="layui-form-label">密码</label>
+                    <div class="layui-input-block">
+                        <input type="password" class="layui-input" placeholder="（选填）如不修改则留空" name="password">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label for="" class="layui-form-label">重复密码</label>
+                    <div class="layui-input-block">
+                        <input type="password" class="layui-input" placeholder="（选填）如不修改则留空" name="confirm_password">
+                    </div>
+                </div>
+                {if $info.id neq 1}
+                <div class="layui-form-item">
+                    <label for="" class="layui-form-label">权限组</label>
+                    <div class="layui-input-block">
+                        <select name="group_id" id="" lay-verify="required">
+                            {foreach :db('auth_group')->where('status',1)->select() as $v}
+                            <option value="{$v.id}" {if $info['group_id']==$v.id}selected{/if}>{$v.title}</option>
+                            {/foreach}
+                        </select>
+                    </div>
+                </div>
+                {/if}
+                <div class="layui-form-item">
+                    <label for="" class="layui-form-label">头像</label>
+                    <div class="layui-input-inline" style="display: flex">
+                        <input type="text" id="head_image" name="head_img" class="layui-input" value="{$info.head_img}" lay-verify="required" style="width: 200px; margin-right: 30px">
+                        <button type="button" class="layui-btn " id="upload">
+                            <i class="layui-icon">&#xe67c;</i>上传图片
+                        </button>
+                    </div>
+                </div>
+                <div class="layui-form-item" id="upload_images">
+                    <label for="" class="layui-form-label"></label>
+                    <span><img src="{$info.head_img}" alt=""></span>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <input type="hidden" name="id" value="{$info.id}">
+                        <button class="layui-btn" lay-submit lay-filter="*">保存</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{/block}
+
+{block name="js"}
+<script>
+    var upload = layui.upload;
+
+    //执行实例
+    var uploadInst = upload.render({
+        elem: '#upload' //绑定元素
+        ,url: "{:url('admin/login/upload',['filename'=>'admin'])}" //上传接口
+        ,done: function(res){
+            if(res.error==0){
+
+                $("#head_image").val(res.url);
+                $("#upload_images span").remove();
+                $("#upload_images").append("<span><img src=\""+res.url+"\" alt=\"\"></span>")
+            }else {
+                layer.msg(res.msg)
+            }
+        }
+    });
+
+</script>
+{/block}

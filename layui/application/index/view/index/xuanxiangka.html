@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>选项卡</title>
+    <link rel="stylesheet" href="__STATIC__/layui/css/layui.css">
+</head>
+
+<body>
+
+    <div class="layui-tab">
+        <ul class="layui-tab-title">
+            <li class="layui-this">网站设置</li>
+            <li>用户管理</li>
+            <li>权限分配</li>
+            <li>商品管理</li>
+            <li>订单管理</li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">内容1</div>
+            <div class="layui-tab-item">内容2</div>
+            <div class="layui-tab-item">内容3</div>
+            <div class="layui-tab-item">内容4</div>
+            <div class="layui-tab-item">内容5</div>
+        </div>
+    </div>
+
+    <div class="layui-tab layui-tab-brief">
+        <ul class="layui-tab-title">
+            <li class="layui-this">网站设置</li>
+            <li>用户管理</li>
+            <li>权限分配</li>
+            <li>商品管理</li>
+            <li>订单管理</li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">内容1</div>
+            <div class="layui-tab-item">内容2</div>
+            <div class="layui-tab-item">内容3</div>
+            <div class="layui-tab-item">内容4</div>
+            <div class="layui-tab-item">内容5</div>
+        </div>
+    </div>
+
+
+
+    <div class="layui-tab layui-tab-brief" lay-filter="demo">
+        <ul class="layui-tab-title" id="myDemo">
+            <li class="layui-this" lay-id="1">网站设置</li>
+            <li lay-id="2">用户管理</li>
+            <li lay-id="3">权限分配</li>
+            <li lay-id="4">商品管理</li>
+            <li lay-id="5">订单管理</li>
+        </ul>
+        <div class="layui-tab-content"></div>
+    </div>
+    <div class="layui-btn-group">
+        <button type="button" class="layui-btn" id="add">增加</button>
+        <button type="button" class="layui-btn" id="change">切换到用户管理</button>
+        <button type="button" class="layui-btn" id="del">删除商品管理</button>
+        <button type="button" class="layui-btn" id="delAll">删除所有</button>
+    </div>
+
+
+    <!-- 单独引入jQuery -->
+    <script src="__JS__/jquery.min.js"></script>
+
+    <script src="__STATIC__/layui/layui.all.js"></script>
+
+    <script>
+
+        var element = layui.element;
+
+        $("#add").click(function () {
+
+            element.tabAdd('demo', {
+                title: '选项卡的标题'
+                , content: '选项卡的内容' //支持传入html
+                , id: '选项卡标题的lay-id属性值'
+            });
+
+
+        })
+        $("#change").click(function () {
+            element.tabChange('demo', '2'); 
+        })
+        $("#del").click(function () {
+            element.tabDelete('demo', '4'); 
+        })
+        $("#delAll").click(function () {
+
+            $("#myDemo>li").each(function(index,item){
+                $id = $(item).attr('lay-id');
+                element.tabDelete('demo',$id);
+            })
+
+        })
+
+
+
+    </script>
+
+</body>
+
+</html>
