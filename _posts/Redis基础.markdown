@@ -1,14 +1,16 @@
 ---
 layout:     post
-title:      "Redis 基础"
-subtitle:   "redis基础命令总结"
-date:       2019-10-22
-author:     "Like"
-header-img: "img/post-bg-2015.jpg"
+title:      "Example Post"
+subtitle:   "ES5, ES6, ES2016, ES.Next: What's going on with JavaScript versioning?"
+date:       2015-09-22
+author:     "Hux"
+header-img: "img/post-bg-js-version.jpg"
 tags:
-    - Redis
-    - PHP
+    - 前端开发
+    - JavaScript
+    - 翻译
 ---
+
 
 # Redis介绍
 
