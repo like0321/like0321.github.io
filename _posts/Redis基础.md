@@ -1,3 +1,15 @@
+---
+layout:     post
+title:      "Redis 基础"
+subtitle:   "redis基础命令总结"
+date:       2019-10-22
+author:     "Like"
+header-img: "img/post-bg-2015.jpg"
+tags:
+    - Redis
+    - PHP
+---
+
 # Redis介绍
 
 ## 概述
